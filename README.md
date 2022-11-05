@@ -16,4 +16,4 @@ Also set net.ipv4.tcp_congestion_control = bypass
 
 1. Make patchfile
 
-2. Replace function tcp_reno_undo_cwnd with something simpler.
+2. Replace function tcp_reno_undo_cwnd with something simpler (for now it is needed for bypass to show up in net.ipv4.tcp_congestion_control).
