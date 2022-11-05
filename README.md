@@ -1,7 +1,8 @@
 **TCP-Bypass**
+
 TCP-Bypass is used to bypass linux's tcp congestion control algorithms in place of qdiscs.
 
-**How to use**
+**How to use:**
 
 Replace Kconfig, Makefile and tcp_bypass.c in the kernel source directory (linux-x.x.x/net/ipv4/)
 
