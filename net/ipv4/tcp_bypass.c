@@ -7,6 +7,9 @@
 #include <linux/module.h>
 #include <net/tcp.h>
 
+/* Void tcp_congestion_ops functions.
+*/
+
 void tcp_bypass_ssthresh(void) {
 }
 
@@ -37,6 +40,12 @@ void tcp_bypass_sndbuf_expand(void) {
 void tcp_bypass_get_info(void) {
 }
 
+void tcp_bypass_init(void) {
+}
+
+void tcp_bypass_release(void) {
+}
+
 static struct tcp_congestion_ops tcp_bypass __read_mostly = {
 	.ssthresh	= tcp_bypass_ssthresh,
 	.cong_avoid	= tcp_bypass_cong_avoid,
@@ -48,6 +57,8 @@ static struct tcp_congestion_ops tcp_bypass __read_mostly = {
 	.undo_cwnd	= tcp_bypass_undo_cwnd,
 	.sndbuf_expand	= tcp_bypass_sndbuf_expand,
 	.get_info	= tcp_bypass_get_info,
+	.init		= tcp_bypass_init,
+	.release	= tcp_bypass_release,
 	.owner		= THIS_MODULE,
 	.name		= "bypass",
 };
