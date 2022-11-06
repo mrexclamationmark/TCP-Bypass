@@ -7,27 +7,47 @@
 #include <linux/module.h>
 #include <net/tcp.h>
 
-void tcp_bypass_cong_control(void) {
-return;
+void tcp_bypass_ssthresh(void) {
 }
 
 void tcp_bypass_cong_avoid(void) {
-return;
+}
+
+void tcp_bypass_set_state(void) {
+}
+
+void tcp_bypass_cwnd_event(void) {
+}
+
+void tcp_bypass_in_ack_event(void) {
+}
+
+void tcp_bypass_pkts_acked(void) {
+}
+
+void tcp_bypass_cong_control(void) {
 }
 
 void tcp_bypass_undo_cwnd(void) {
-return;
 }
 
-void tcp_bypass_ssthresh(void) {
-return;
+void tcp_bypass_sndbuf_expand(void) {
+}
+
+void tcp_bypass_get_info(void) {
 }
 
 static struct tcp_congestion_ops tcp_bypass __read_mostly = {
 	.ssthresh	= tcp_bypass_ssthresh,
-	.undo_cwnd	= tcp_bypass_undo_cwnd,
 	.cong_avoid	= tcp_bypass_cong_avoid,
+	.set_state	= tcp_bypass_set_state,
+	.cwnd_event	= tcp_bypass_cwnd_event,
+	.in_ack_event	= tcp_bypass_in_ack_event,
+	.pkts_acked	= tcp_bypass_pkts_acked,
 	.cong_control   = tcp_bypass_cong_control,
+	.undo_cwnd	= tcp_bypass_undo_cwnd,
+	.sndbuf_expand	= tcp_bypass_sndbuf_expand,
+	.get_info	= tcp_bypass_get_info,
 	.owner		= THIS_MODULE,
 	.name		= "bypass",
 };
