@@ -1,6 +1,6 @@
 **TCP-Bypass**
 
-TCP-Bypass is used to bypass linux's tcp congestion control algorithms in place of qdiscs.
+TCP-Bypass is used to bypass linux's tcp congestion control algorithms in place of qdiscs (otherwords, use qdiscs instead).
 
 **How to use:**
 
