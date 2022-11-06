@@ -7,7 +7,7 @@
 #include <linux/module.h>
 #include <net/tcp.h>
 
-void tcp_bypass_cong_control(void){
+void tcp_bypass_cong_control(void) {
 return;
 }
 
