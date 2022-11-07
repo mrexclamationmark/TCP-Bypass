@@ -1,14 +1,12 @@
 /* SPDX-License-Identifier: GPL-2.0-only
 * mrexclamationmarks TCP bypass
 * TCP bypass is a congestion control bypass for linux.
-* using qdiscs is better than congestion control algorithms.
-*/
+* using qdiscs is better than congestion control algorithms. */
 
 #include <linux/module.h>
 #include <net/tcp.h>
 
-/* Void tcp_congestion_ops functions.
-*/
+/* tcp_congestion_ops function calls. */
 
 void tcp_bypass_ssthresh(void) {
 }
@@ -31,7 +29,13 @@ void tcp_bypass_pkts_acked(void) {
 void tcp_bypass_cong_control(void) {
 }
 
-void tcp_bypass_undo_cwnd(void) {
+/* tcp_bypass_undo_cwnd needs to return something */
+
+u32 tcp_bypass_undo_cwnd(struct sock *sk) {
+
+const struct tcp_sock *tp = tcp_sk(sk);
+
+return tcp_snd_cwnd(tcp_sk(sk));
 }
 
 void tcp_bypass_sndbuf_expand(void) {
