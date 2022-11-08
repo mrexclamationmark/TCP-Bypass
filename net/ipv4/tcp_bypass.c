@@ -8,46 +8,44 @@
 
 /* tcp_congestion_ops function calls. */
 
-void tcp_bypass_ssthresh(void) {
+u32 tcp_bypass_ssthresh(struct sock *sk) {
+return 0;
 }
 
-void tcp_bypass_cong_avoid(void) {
+void tcp_bypass_cong_avoid(struct sock *sk, u32 ack, u32 acked) {
 }
 
-void tcp_bypass_set_state(void) {
+void tcp_bypass_set_state(struct sock *sk, u8 new_state) {
 }
 
-void tcp_bypass_cwnd_event(void) {
+void tcp_bypass_cwnd_event(struct sock *sk, enum tcp_ca_event ev) {
 }
 
-void tcp_bypass_in_ack_event(void) {
+void tcp_bypass_in_ack_event(struct sock *sk, u32 flags) {
 }
 
-void tcp_bypass_pkts_acked(void) {
+void tcp_bypass_pkts_acked(struct sock *sk, const struct ack_sample *sample) {
 }
 
-void tcp_bypass_cong_control(void) {
+void tcp_bypass_cong_control(struct sock *sk, const struct rate_sample *rs) {
 }
-
-/* tcp_bypass_undo_cwnd needs to return something */
 
 u32 tcp_bypass_undo_cwnd(struct sock *sk) {
-
-const struct tcp_sock *tp = tcp_sk(sk);
-
-return tcp_snd_cwnd(tcp_sk(sk));
+return 0;
 }
 
-void tcp_bypass_sndbuf_expand(void) {
+u32 tcp_bypass_sndbuf_expand(struct sock *sk) {
+return 0;
 }
 
-void tcp_bypass_get_info(void) {
+size_t tcp_bypass_get_info(struct sock *sk, u32 ext, int *attr, union tcp_cc_info *info) {
+return 0;
 }
 
-void tcp_bypass_init(void) {
+void tcp_bypass_init(struct sock *sk) {
 }
 
-void tcp_bypass_release(void) {
+void tcp_bypass_release(struct sock *sk) {
 }
 
 static struct tcp_congestion_ops tcp_bypass __read_mostly = {
