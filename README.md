@@ -14,8 +14,8 @@ Also set net.ipv4.tcp_congestion_control = bypass
 
 **TODO**
 
-1. Fix Code
-2. Make patchfile (once its finalized)
+1. Fix kernel panic issue.
+2. Make patchfile (once its finalized).
 
 **Known Issues:**
 
