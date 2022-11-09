@@ -52,7 +52,7 @@ inline void tcp_bypass_init(struct sock *sk) {
 inline void tcp_bypass_release(struct sock *sk) {
 }
 
-static struct tcp_congestion_ops tcp_bypass = {
+static struct tcp_congestion_ops tcp_bypass __read_mostly = {
 	.flags		= TCP_CONG_NON_RESTRICTED,
 	.ssthresh	= tcp_bypass_ssthresh,
 	.cong_avoid	= tcp_bypass_cong_avoid,
