@@ -8,11 +8,11 @@ Replace Kconfig, Makefile and tcp_bypass.c in the kernel source directory (linux
 
 Run make menuconfig in the root of the kernel source directory and select TCP-Bypass (CONFIG_TCP_CONG_BYPASS) under CONFIG_TCP_CONG_ADVANCED in Networking support>Networking options>TCP: advanced congestion control
 
-**(Optional)** 
+**(Optional):** 
 
 Also set net.ipv4.tcp_congestion_control = bypass
 
-**TODO**
+**TODO:**
 
 1. Fix kernel panic issue.
 2. Make patchfile (once its finalized).
