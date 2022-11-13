@@ -34,10 +34,11 @@ static inline void tcp_bypass_cong_control(struct sock *sk, const struct rate_sa
 }
 
 static inline u32 tcp_bypass_undo_cwnd(struct sock *sk) {
+	
+	u32 maxu32;
+	maxu32 = 0xffffffff;
 
-	const struct tcp_sock *tp = tcp_sk(sk);
-
-	return max_t(u32, tp->snd_cwnd, 0);
+	return tcp_snd_cwnd(maxu32);
 }
 
 static inline u32 tcp_bypass_sndbuf_expand(struct sock *sk) {
