@@ -10,9 +10,7 @@
 
 static inline u32 tcp_bypass_ssthresh(struct sock *sk) {
 
-	const struct tcp_sock *tp = tcp_sk(sk);
-
-	return min_t(u32, tp->snd_ssthresh, 0);
+	return 0;
 }
 
 static inline void tcp_bypass_cong_avoid(struct sock *sk, u32 ack, u32 acked) {
@@ -34,7 +32,7 @@ static inline void tcp_bypass_cong_control(struct sock *sk, const struct rate_sa
 }
 
 static inline u32 tcp_bypass_undo_cwnd(struct sock *sk) {
-	
+
 	u32 maxu32;
 	maxu32 = 0xffffffff;
 
@@ -52,6 +50,22 @@ static inline size_t tcp_bypass_get_info(struct sock *sk, u32 ext, int *attr, un
 }
 
 static inline void tcp_bypass_init(struct sock *sk) {
+
+	struct tcp_sock *tp = tcp_sk(sk);
+
+	/* Set TCP socket variables */
+
+	u32 minu32;
+	u32 maxu32;
+	minu32 = 0;
+	maxu32 = 0xffffffff;
+
+	tp->snd_wnd = maxu32;
+	tp->snd_ssthresh = minu32;
+	tp->snd_cwnd = maxu32;
+	tp->prior_cwnd = maxu32;
+	tp->rcv_wnd = maxu32;
+	tp->prior_ssthresh = minu32;
 }
 
 static inline void tcp_bypass_release(struct sock *sk) {
@@ -75,12 +89,12 @@ static struct tcp_congestion_ops tcp_bypass __read_mostly = {
 	.name		= "bypass",
 };
 
-inline int __init tcp_bypass_register(void)
+static inline int __init tcp_bypass_register(void)
 {
 	return tcp_register_congestion_control(&tcp_bypass);
 }
 
-inline void __exit tcp_bypass_unregister(void)
+static inline void __exit tcp_bypass_unregister(void)
 {
 	tcp_unregister_congestion_control(&tcp_bypass);
 }
