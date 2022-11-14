@@ -38,7 +38,7 @@ static inline u32 tcp_bypass_undo_cwnd(struct sock *sk) {
 
 	const struct tcp_sock *tp = maxu32;
 
-	return tcp_snd_cwnd(tp);
+	return tcp_snd_cwnd(&tp);
 }
 
 static inline u32 tcp_bypass_sndbuf_expand(struct sock *sk) {
