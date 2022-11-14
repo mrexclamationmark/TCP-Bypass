@@ -6,6 +6,9 @@
 #include <linux/module.h>
 #include <net/tcp.h>
 
+const u32 minu32 = 0;
+const u32 maxu32 = 0xffffffff;
+
 /* tcp_congestion_ops function calls. */
 
 static inline u32 tcp_bypass_ssthresh(struct sock *sk) {
@@ -33,10 +36,9 @@ static inline void tcp_bypass_cong_control(struct sock *sk, const struct rate_sa
 
 static inline u32 tcp_bypass_undo_cwnd(struct sock *sk) {
 
-	u32 maxu32;
-	maxu32 = 0xffffffff;
+	const struct tcp_sock *tp = maxu32;
 
-	return tcp_snd_cwnd(maxu32);
+	return tcp_snd_cwnd(tp);
 }
 
 static inline u32 tcp_bypass_sndbuf_expand(struct sock *sk) {
@@ -53,13 +55,12 @@ static inline void tcp_bypass_init(struct sock *sk) {
 
 	struct tcp_sock *tp = tcp_sk(sk);
 
+	u8 setnagleoff;
+	setnagleoff = 1;
+
 	/* Set TCP socket variables */
 
-	u32 minu32;
-	u32 maxu32;
-	minu32 = 0;
-	maxu32 = 0xffffffff;
-
+	tp->nonagle = setnagleoff;
 	tp->snd_wnd = maxu32;
 	tp->snd_ssthresh = minu32;
 	tp->snd_cwnd = maxu32;
