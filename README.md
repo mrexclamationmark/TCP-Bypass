@@ -19,7 +19,3 @@ Also set net.ipv4.tcp_congestion_control = bypass
 **TODO:**
 
 1. Make patchfile (once its finalized).
-
-**Known Issues:**
-
-Kernel panics related to undo_cwnd, needs more figureing out.
