@@ -6,8 +6,8 @@
 #include <linux/module.h>
 #include <net/tcp.h>
 
-const u32 minu32 = 0;
-const u32 maxu32 = 0xffffffff;
+static const u32 minu32 __read_mostly = 0;
+static const u32 maxu32 __read_mostly = 0xffffffff;
 
 /* tcp_congestion_ops function calls. */
 
