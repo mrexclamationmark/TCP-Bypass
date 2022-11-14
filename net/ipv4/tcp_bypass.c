@@ -55,18 +55,20 @@ static inline void tcp_bypass_init(struct sock *sk) {
 
 	struct tcp_sock *tp = tcp_sk(sk);
 
-	u8 setnagleoff;
-	setnagleoff = 1;
+/*	u8 setnagleoff;
+	setnagleoff = 1;*/
 
 	/* Set TCP socket variables */
 
-	tp->nonagle = setnagleoff;
-	tp->snd_wnd = maxu32;
+	/* Commented variables need more testing */
+
+/*	tp->nonagle = setnagleoff;*/
+/*	tp->snd_wnd = maxu32;*/
 	tp->snd_ssthresh = minu32;
 	tp->snd_cwnd = maxu32;
-	tp->prior_cwnd = maxu32;
+/*	tp->prior_cwnd = maxu32;
 	tp->rcv_wnd = maxu32;
-	tp->prior_ssthresh = minu32;
+	tp->prior_ssthresh = minu32;*/
 }
 
 static inline void tcp_bypass_release(struct sock *sk) {
