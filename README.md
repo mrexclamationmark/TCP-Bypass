@@ -18,4 +18,4 @@ Also set net.ipv4.tcp_congestion_control = bypass
 
 **TODO:**
 
-1. Make patchfile (once its finalized).
+1. Make patchfile.
