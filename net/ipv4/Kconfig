@@ -473,8 +473,7 @@ config TCP_CONG_BYPASS
 	tristate "TCP Bypass"
 	default m
 	help
-	  TCP Bypass is used to replace congestion control algorithms
-	  with qdiscs.
+	  TCP Bypass is used to bypass congestion control.
 
 config TCP_CONG_BIC
 	tristate "Binary Increase Congestion (BIC) control"
