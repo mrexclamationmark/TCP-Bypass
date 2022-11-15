@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-only
  mrexclamationmarks TCP bypass
- TCP bypass is a congestion control bypass for linux.
- using qdiscs is better than congestion control algorithms. */
+ TCP bypass is a congestion control bypass for linux.*/
 
 #include <linux/module.h>
 #include <net/tcp.h>
@@ -9,7 +8,7 @@
 static const u32 minu32 __read_mostly = 0;
 static const u32 maxu32 __read_mostly = 0xffffffff;
 
-/* tcp_congestion_ops function calls. */
+/* tcp_congestion_ops function calls.*/
 
 static inline u32 tcp_bypass_ssthresh(struct sock *sk) {
 
@@ -33,6 +32,8 @@ static inline void tcp_bypass_pkts_acked(struct sock *sk, const struct ack_sampl
 
 static inline void tcp_bypass_cong_control(struct sock *sk, const struct rate_sample *rs) {
 }
+
+/* undo_cwnd is the only function that needs to be returned */
 
 static inline u32 tcp_bypass_undo_cwnd(struct sock *sk) {
 
