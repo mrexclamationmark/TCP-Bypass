@@ -70,11 +70,11 @@ static inline void tcp_bypass_release(struct sock *sk) {
 }
 
 static struct tcp_congestion_ops tcp_bypass __read_mostly = {
+	.init		= tcp_bypass_init,
+	.undo_cwnd	= tcp_bypass_undo_cwnd,
 	.name		= "bypass",
 	.flags		= TCP_CONG_NON_RESTRICTED,
 	.owner		= THIS_MODULE,
-	.init		= tcp_bypass_init,
-	.undo_cwnd	= tcp_bypass_undo_cwnd,
 	.ssthresh	= tcp_bypass_ssthresh,
 	.cong_avoid	= tcp_bypass_cong_avoid,
 	.set_state	= tcp_bypass_set_state,
