@@ -18,4 +18,6 @@ Also set net.ipv4.tcp_congestion_control = bypass
 
 **TODO:**
 
-1. Make patchfile.
+1. Figure out which functions are being called the most and reorder structs accordingly.
+
+2. Make patchfile.
