@@ -19,9 +19,6 @@ static inline void tcp_bypass_cong_control(struct sock *sk, const struct rate_sa
 static inline void tcp_bypass_cwnd_event(struct sock *sk, enum tcp_ca_event ev) {
 }
 
-static inline void tcp_bypass_release(struct sock *sk) {
-}
-
 static inline u32 tcp_bypass_sndbuf_expand(struct sock *sk) {
 
 	return 0;
@@ -61,6 +58,9 @@ static inline void tcp_bypass_init(struct sock *sk) {
 	tp->prior_ssthresh = 0;
 }
 
+static inline void tcp_bypass_release(struct sock *sk) {
+}
+
 static inline void tcp_bypass_cong_avoid(struct sock *sk, u32 ack, u32 acked) {
 }
 
@@ -74,12 +74,12 @@ static struct tcp_congestion_ops tcp_bypass __read_mostly = {
 	.pkts_acked	= tcp_bypass_pkts_acked,
 	.cong_control   = tcp_bypass_cong_control,
 	.cwnd_event	= tcp_bypass_cwnd_event,
-	.release	= tcp_bypass_release,
 	.sndbuf_expand	= tcp_bypass_sndbuf_expand,
 	.set_state	= tcp_bypass_set_state,
 	.ssthresh	= tcp_bypass_ssthresh,
 	.undo_cwnd	= tcp_bypass_undo_cwnd,
 	.init		= tcp_bypass_init,
+	.release	= tcp_bypass_release,
 	.name		= "bypass",
 	.flags		= TCP_CONG_NON_RESTRICTED,
 	.owner		= THIS_MODULE,
