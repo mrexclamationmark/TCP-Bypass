@@ -7,6 +7,43 @@
 
 /* tcp_congestion_ops function calls. */
 
+static inline void tcp_bypass_in_ack_event(struct sock *sk, u32 flags) {
+}
+
+static inline void tcp_bypass_pkts_acked(struct sock *sk, const struct ack_sample *sample) {
+}
+
+static inline void tcp_bypass_cong_control(struct sock *sk, const struct rate_sample *rs) {
+}
+
+static inline void tcp_bypass_cwnd_event(struct sock *sk, enum tcp_ca_event ev) {
+}
+
+static inline void tcp_bypass_release(struct sock *sk) {
+}
+
+static inline u32 tcp_bypass_sndbuf_expand(struct sock *sk) {
+
+	return 0;
+}
+
+static inline void tcp_bypass_set_state(struct sock *sk, u8 new_state) {
+}
+
+static inline u32 tcp_bypass_ssthresh(struct sock *sk) {
+
+	return 0;
+}
+
+/* undo_cwnd is the only function that needs to be returned */
+
+static inline u32 tcp_bypass_undo_cwnd(struct sock *sk) {
+
+	const struct tcp_sock *tp = 0xffffffff;
+
+	return &tp->snd_cwnd;
+}
+
 static inline void tcp_bypass_init(struct sock *sk) {
 
 	struct tcp_sock *tp = tcp_sk(sk);
@@ -24,41 +61,7 @@ static inline void tcp_bypass_init(struct sock *sk) {
 	tp->prior_ssthresh = 0;
 }
 
-/* undo_cwnd is the only function that needs to be returned */
-
-static inline u32 tcp_bypass_undo_cwnd(struct sock *sk) {
-
-	const struct tcp_sock *tp = 0xffffffff;
-
-	return &tp->snd_cwnd;
-}
-
-static inline u32 tcp_bypass_ssthresh(struct sock *sk) {
-
-	return 0;
-}
-
 static inline void tcp_bypass_cong_avoid(struct sock *sk, u32 ack, u32 acked) {
-}
-
-static inline void tcp_bypass_set_state(struct sock *sk, u8 new_state) {
-}
-
-static inline void tcp_bypass_cwnd_event(struct sock *sk, enum tcp_ca_event ev) {
-}
-
-static inline void tcp_bypass_in_ack_event(struct sock *sk, u32 flags) {
-}
-
-static inline void tcp_bypass_pkts_acked(struct sock *sk, const struct ack_sample *sample) {
-}
-
-static inline void tcp_bypass_cong_control(struct sock *sk, const struct rate_sample *rs) {
-}
-
-static inline u32 tcp_bypass_sndbuf_expand(struct sock *sk) {
-
-	return 0;
 }
 
 static inline size_t tcp_bypass_get_info(struct sock *sk, u32 ext, int *attr, union tcp_cc_info *info) {
@@ -66,25 +69,22 @@ static inline size_t tcp_bypass_get_info(struct sock *sk, u32 ext, int *attr, un
 	return 0;
 }
 
-static inline void tcp_bypass_release(struct sock *sk) {
-}
-
 static struct tcp_congestion_ops tcp_bypass __read_mostly = {
-	.init		= tcp_bypass_init,
-	.undo_cwnd	= tcp_bypass_undo_cwnd,
-	.name		= "bypass",
-	.flags		= TCP_CONG_NON_RESTRICTED,
-	.owner		= THIS_MODULE,
-	.ssthresh	= tcp_bypass_ssthresh,
-	.cong_avoid	= tcp_bypass_cong_avoid,
-	.set_state	= tcp_bypass_set_state,
-	.cwnd_event	= tcp_bypass_cwnd_event,
 	.in_ack_event	= tcp_bypass_in_ack_event,
 	.pkts_acked	= tcp_bypass_pkts_acked,
 	.cong_control   = tcp_bypass_cong_control,
-	.sndbuf_expand	= tcp_bypass_sndbuf_expand,
-	.get_info	= tcp_bypass_get_info,
+	.cwnd_event	= tcp_bypass_cwnd_event,
 	.release	= tcp_bypass_release,
+	.sndbuf_expand	= tcp_bypass_sndbuf_expand,
+	.set_state	= tcp_bypass_set_state,
+	.ssthresh	= tcp_bypass_ssthresh,
+	.undo_cwnd	= tcp_bypass_undo_cwnd,
+	.init		= tcp_bypass_init,
+	.name		= "bypass",
+	.flags		= TCP_CONG_NON_RESTRICTED,
+	.owner		= THIS_MODULE,
+	.cong_avoid	= tcp_bypass_cong_avoid,
+	.get_info	= tcp_bypass_get_info,
 };
 
 static inline int __init tcp_bypass_register(void)
