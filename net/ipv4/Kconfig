@@ -402,6 +402,16 @@ config INET_IPCOMP
 
 	  If unsure, say Y.
 
+config INET_TABLE_PERTURB_ORDER
+	int "INET: Source port perturbation table size (as power of 2)" if EXPERT
+	default 16
+	help
+	  Source port perturbation table size (as power of 2) for
+	  RFC 6056 3.3.4.  Algorithm 4: Double-Hash Port Selection Algorithm.
+
+	  The default is almost always what you want.
+	  Only change this if you know what you are doing.
+
 config INET_XFRM_TUNNEL
 	tristate
 	select INET_TUNNEL
@@ -473,7 +483,7 @@ config TCP_CONG_BYPASS
 	tristate "TCP Bypass"
 	default m
 	help
-	  TCP Bypass is used to bypass congestion control.
+	  TCP Bypass is used to bypass TCP congestion control.
 
 config TCP_CONG_BIC
 	tristate "Binary Increase Congestion (BIC) control"
@@ -681,7 +691,7 @@ choice
 	  Select the TCP congestion control that will be used by default
 	  for all connections.
 
-	config DEFAULT_BYPASS	
+	config DEFAULT_BYPASS
 		bool "Bypass" if TCP_CONG_BYPASS=y
 
 	config DEFAULT_BIC
