@@ -10,6 +10,12 @@ Run make menuconfig in the root of the kernel source directory and select TCP-By
 
 Also set net.ipv4.tcp_congestion_control = bypass
 
+**tcp_bypass.patch**
+
+Version: linux-6.1
+
+Copy the patchfile to your main kernel source directory and run "patch -p1 < tcp_bypass.patch"
+
 **Known Issues:**
 
 None
