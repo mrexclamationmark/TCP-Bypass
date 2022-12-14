@@ -1,0 +1,98 @@
+--- /tcp_bypass.c	2022-12-02 18:38:09.822121353 -0500
++++ tcp_bypass.c	2022-12-08 00:52:17.013418205 -0500
+@@ -5,30 +5,57 @@
+ #include <linux/module.h>
+ #include <net/tcp.h>
+ 
++static int in_ack_event = 0;
++static int pkts_acked = 0;
++static int cong_control = 0;
++static int cwnd_event = 0;
++static int sndbuf_expand = 0;
++static int set_state = 0;
++static int ssthresh = 0;
++static int undo_cwnd = 0;
++static int init = 0;
++static int release = 0;
++static int cong_avoid = 0;
++static int get_info = 0;
++
+ /* tcp_congestion_ops function calls. */
+ 
+ static inline void tcp_bypass_in_ack_event(struct sock *sk, u32 flags) {
++
++	printk("in_ack_event:%d\n", in_ack_event++);
+ }
+ 
+ static inline void tcp_bypass_pkts_acked(struct sock *sk, const struct ack_sample *sample) {
++
++	printk("pkts_acked:%d\n", pkts_acked++);
+ }
+ 
+ static inline void tcp_bypass_cong_control(struct sock *sk, const struct rate_sample *rs) {
++
++	printk("cong_control:%d\n", cong_control++);
+ }
+ 
+ static inline void tcp_bypass_cwnd_event(struct sock *sk, enum tcp_ca_event ev) {
++
++	printk("cwnd_event:%d\n", cwnd_event++);
+ }
+ 
+ static inline u32 tcp_bypass_sndbuf_expand(struct sock *sk) {
+ 
++	printk("sndbuf_expand:%d\n", sndbuf_expand++);
++
+ 	return 0;
+ }
+ 
+ static inline void tcp_bypass_set_state(struct sock *sk, u8 new_state) {
++
++	printk("set_state:%d\n", set_state++);
+ }
+ 
+ static inline u32 tcp_bypass_ssthresh(struct sock *sk) {
+ 
++	printk("ssthresh:%d\n", ssthresh++);
++
+ 	return 0;
+ }
+ 
+@@ -36,6 +63,8 @@
+ 
+ static inline u32 tcp_bypass_undo_cwnd(struct sock *sk) {
+ 
++	printk("undo_cwnd:%d\n", undo_cwnd++);
++
+ 	const struct tcp_sock *tp = 0xffffffff;
+ 
+ 	return &tp->snd_cwnd;
+@@ -43,6 +72,8 @@
+ 
+ static inline void tcp_bypass_init(struct sock *sk) {
+ 
++	printk("init:%d\n", init++);
++
+ 	struct tcp_sock *tp = tcp_sk(sk);
+ 
+ 	/* Set TCP socket variables */
+@@ -59,13 +90,19 @@
+ }
+ 
+ static inline void tcp_bypass_release(struct sock *sk) {
++
++	printk("release:%d\n", release++);
+ }
+ 
+ static inline void tcp_bypass_cong_avoid(struct sock *sk, u32 ack, u32 acked) {
++
++	printk("cong_avoid:%d\n", cong_avoid++);
+ }
+ 
+ static inline size_t tcp_bypass_get_info(struct sock *sk, u32 ext, int *attr, union tcp_cc_info *info) {
+ 
++	printk("get_info:%d\n", get_info++);
++
+ 	return 0;
+ }
+ 
