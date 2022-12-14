@@ -20,6 +20,8 @@ Copy the patchfile to your main kernel source directory and run "patch -p1 < tcp
 
 This is a debug patchfile to see how many times a function is called (this was used to reorder the structs based on how many times the function was called in order to optimize it).
 
+Copy the patchfile to your main kernel source directory and run "patch -p1 < tcp_bypass_debug.patch"
+
 **Known Issues:**
 
 None
